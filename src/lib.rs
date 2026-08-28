@@ -15,6 +15,8 @@
 //! (cd ../glade-decl && python3 corpus/build.py)        # regenerates src/vectors.rs
 //! ```
 
+extern crate alloc;
+
 pub mod api;
 pub mod cbor;
 pub mod ext;
@@ -33,4 +35,4 @@ mod vectors;
 /// The pinned `glade-decl` contract commit this crate was generated from. CI
 /// regenerates from this exact contract and runs the corpus vectors; skew fails
 /// the build rather than drifting silently.
-pub const CONTRACT_VERSION: &str = "ccdae14a544d7dedd28c32b0b2a16498e33b366b";
+pub const CONTRACT_VERSION: &str = "99a04e0b960d03cbe92c0ec17321761eda860845";

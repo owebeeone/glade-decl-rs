@@ -16,6 +16,7 @@ pub static VECTORS: &[(&str, &str, &str)] = &[
     ("edge/binding-account-commons", "BindingDecl", "a701a1016d616363742e73657474696e67730200030004f60500060007a2010002f6"),
     ("edge/binding-deployment-window", "BindingDecl", "a701a1016a7379732e6e6f746963650205030004f60502060007a2010002f6"),
     ("edge/binding-doc-commons-log", "BindingDecl", "a701a10168646f632e626f64790201030004f60501060007a2010102f6"),
+    ("edge/binding-doc-swmr", "BindingDecl", "a701a1016877732e66696c65730206030004f60501060007a2010102f6"),
     ("edge/binding-exchange", "BindingDecl", "a701a1016a6772617a656c2e72756e0204030004f60501060007a2010002f6"),
     ("edge/binding-external-private-ttl", "BindingDecl", "a701a1016a646f632e637572736f720203030104656d6574656f0501060107a2010202191388"),
     ("edge/binding-message-private", "BindingDecl", "a701a10168646f632e636861740202030004f60501060107a2010102f6"),
@@ -34,13 +35,13 @@ pub static VECTORS: &[(&str, &str, &str)] = &[
 /// Decode->re-encode dispatch by message name, over this crate's generated types.
 pub fn reencode(message: &str, c: &crate::Cbor) -> crate::Cbor {
     match message {
-        "AdvertisementRecord" => crate::AdvertisementRecord::from_cbor(c).to_cbor(),
-        "BindingDecl" => crate::BindingDecl::from_cbor(c).to_cbor(),
-        "ChangeEvent" => crate::ChangeEvent::from_cbor(c).to_cbor(),
-        "GladeId" => crate::GladeId::from_cbor(c).to_cbor(),
-        "GladeIdManifest" => crate::GladeIdManifest::from_cbor(c).to_cbor(),
-        "OriginMeta" => crate::OriginMeta::from_cbor(c).to_cbor(),
-        "Retention" => crate::Retention::from_cbor(c).to_cbor(),
+        "AdvertisementRecord" => crate::AdvertisementRecord::from_cbor(c).expect("corpus decode: AdvertisementRecord").to_cbor(),
+        "BindingDecl" => crate::BindingDecl::from_cbor(c).expect("corpus decode: BindingDecl").to_cbor(),
+        "ChangeEvent" => crate::ChangeEvent::from_cbor(c).expect("corpus decode: ChangeEvent").to_cbor(),
+        "GladeId" => crate::GladeId::from_cbor(c).expect("corpus decode: GladeId").to_cbor(),
+        "GladeIdManifest" => crate::GladeIdManifest::from_cbor(c).expect("corpus decode: GladeIdManifest").to_cbor(),
+        "OriginMeta" => crate::OriginMeta::from_cbor(c).expect("corpus decode: OriginMeta").to_cbor(),
+        "Retention" => crate::Retention::from_cbor(c).expect("corpus decode: Retention").to_cbor(),
         other => panic!("reencode: unknown message {other}"),
     }
 }
