@@ -16,6 +16,7 @@ pub static VECTORS: &[(&str, &str, &str)] = &[
     ("edge/binding-account-commons", "BindingDecl", "a701a1016d616363742e73657474696e67730200030004f60500060007a2010002f6"),
     ("edge/binding-deployment-window", "BindingDecl", "a701a1016a7379732e6e6f746963650205030004f60502060007a2010002f6"),
     ("edge/binding-doc-commons-log", "BindingDecl", "a701a10168646f632e626f64790201030004f60501060007a2010102f6"),
+    ("edge/binding-doc-crdt", "BindingDecl", "a701a10177646f632e636f6c6c61626f7261746976652d6e6f7465730207030004f60501060007a2010102f6"),
     ("edge/binding-doc-swmr", "BindingDecl", "a701a1016877732e66696c65730206030004f60501060007a2010102f6"),
     ("edge/binding-exchange", "BindingDecl", "a701a1016a6772617a656c2e72756e0204030004f60501060007a2010002f6"),
     ("edge/binding-external-private-ttl", "BindingDecl", "a701a1016a646f632e637572736f720203030104656d6574656f0501060107a2010202191388"),

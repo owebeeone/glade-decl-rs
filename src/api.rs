@@ -11,6 +11,7 @@ pub enum Shape {
     Exchange,
     Window,
     Swmr,
+    Crdt,
 }
 impl Shape {
     pub fn wire(self) -> i64 { match self {
@@ -21,6 +22,7 @@ impl Shape {
         Self::Exchange => 4,
         Self::Window => 5,
         Self::Swmr => 6,
+        Self::Crdt => 7,
     } }
     pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
         0 => Self::Value,
@@ -30,6 +32,7 @@ impl Shape {
         4 => Self::Exchange,
         5 => Self::Window,
         6 => Self::Swmr,
+        7 => Self::Crdt,
         _ => return Err(DecodeError::UnknownEnum { enum_name: "Shape", value: v }),
     }) }
 }
