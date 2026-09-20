@@ -4,7 +4,8 @@ use crate::cbor::{Cbor, DecodeError};
 
 #[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum Shape {
-    #[default] Value,
+    #[default]
+    Value,
     Log,
     Message,
     Stream,
@@ -14,118 +15,177 @@ pub enum Shape {
     Crdt,
 }
 impl Shape {
-    pub fn wire(self) -> i64 { match self {
-        Self::Value => 0,
-        Self::Log => 1,
-        Self::Message => 2,
-        Self::Stream => 3,
-        Self::Exchange => 4,
-        Self::Window => 5,
-        Self::Swmr => 6,
-        Self::Crdt => 7,
-    } }
-    pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
-        0 => Self::Value,
-        1 => Self::Log,
-        2 => Self::Message,
-        3 => Self::Stream,
-        4 => Self::Exchange,
-        5 => Self::Window,
-        6 => Self::Swmr,
-        7 => Self::Crdt,
-        _ => return Err(DecodeError::UnknownEnum { enum_name: "Shape", value: v }),
-    }) }
+    pub fn wire(self) -> i64 {
+        match self {
+            Self::Value => 0,
+            Self::Log => 1,
+            Self::Message => 2,
+            Self::Stream => 3,
+            Self::Exchange => 4,
+            Self::Window => 5,
+            Self::Swmr => 6,
+            Self::Crdt => 7,
+        }
+    }
+    pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
+        Ok(match v {
+            0 => Self::Value,
+            1 => Self::Log,
+            2 => Self::Message,
+            3 => Self::Stream,
+            4 => Self::Exchange,
+            5 => Self::Window,
+            6 => Self::Swmr,
+            7 => Self::Crdt,
+            _ => {
+                return Err(DecodeError::UnknownEnum {
+                    enum_name: "Shape",
+                    value: v,
+                })
+            }
+        })
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum Authority {
-    #[default] Share,
+    #[default]
+    Share,
     External,
 }
 impl Authority {
-    pub fn wire(self) -> i64 { match self {
-        Self::Share => 0,
-        Self::External => 1,
-    } }
-    pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
-        0 => Self::Share,
-        1 => Self::External,
-        _ => return Err(DecodeError::UnknownEnum { enum_name: "Authority", value: v }),
-    }) }
+    pub fn wire(self) -> i64 {
+        match self {
+            Self::Share => 0,
+            Self::External => 1,
+        }
+    }
+    pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
+        Ok(match v {
+            0 => Self::Share,
+            1 => Self::External,
+            _ => {
+                return Err(DecodeError::UnknownEnum {
+                    enum_name: "Authority",
+                    value: v,
+                })
+            }
+        })
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum DomainAnchor {
-    #[default] Account,
+    #[default]
+    Account,
     Document,
     Deployment,
 }
 impl DomainAnchor {
-    pub fn wire(self) -> i64 { match self {
-        Self::Account => 0,
-        Self::Document => 1,
-        Self::Deployment => 2,
-    } }
-    pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
-        0 => Self::Account,
-        1 => Self::Document,
-        2 => Self::Deployment,
-        _ => return Err(DecodeError::UnknownEnum { enum_name: "DomainAnchor", value: v }),
-    }) }
+    pub fn wire(self) -> i64 {
+        match self {
+            Self::Account => 0,
+            Self::Document => 1,
+            Self::Deployment => 2,
+        }
+    }
+    pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
+        Ok(match v {
+            0 => Self::Account,
+            1 => Self::Document,
+            2 => Self::Deployment,
+            _ => {
+                return Err(DecodeError::UnknownEnum {
+                    enum_name: "DomainAnchor",
+                    value: v,
+                })
+            }
+        })
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum ZoneKind {
-    #[default] Commons,
+    #[default]
+    Commons,
     Private,
 }
 impl ZoneKind {
-    pub fn wire(self) -> i64 { match self {
-        Self::Commons => 0,
-        Self::Private => 1,
-    } }
-    pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
-        0 => Self::Commons,
-        1 => Self::Private,
-        _ => return Err(DecodeError::UnknownEnum { enum_name: "ZoneKind", value: v }),
-    }) }
+    pub fn wire(self) -> i64 {
+        match self {
+            Self::Commons => 0,
+            Self::Private => 1,
+        }
+    }
+    pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
+        Ok(match v {
+            0 => Self::Commons,
+            1 => Self::Private,
+            _ => {
+                return Err(DecodeError::UnknownEnum {
+                    enum_name: "ZoneKind",
+                    value: v,
+                })
+            }
+        })
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum RetentionPolicy {
-    #[default] Latest,
+    #[default]
+    Latest,
     FromCursor,
     Ttl,
 }
 impl RetentionPolicy {
-    pub fn wire(self) -> i64 { match self {
-        Self::Latest => 0,
-        Self::FromCursor => 1,
-        Self::Ttl => 2,
-    } }
-    pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
-        0 => Self::Latest,
-        1 => Self::FromCursor,
-        2 => Self::Ttl,
-        _ => return Err(DecodeError::UnknownEnum { enum_name: "RetentionPolicy", value: v }),
-    }) }
+    pub fn wire(self) -> i64 {
+        match self {
+            Self::Latest => 0,
+            Self::FromCursor => 1,
+            Self::Ttl => 2,
+        }
+    }
+    pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
+        Ok(match v {
+            0 => Self::Latest,
+            1 => Self::FromCursor,
+            2 => Self::Ttl,
+            _ => {
+                return Err(DecodeError::UnknownEnum {
+                    enum_name: "RetentionPolicy",
+                    value: v,
+                })
+            }
+        })
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum ChangeKind {
-    #[default] Refresh,
+    #[default]
+    Refresh,
     Delta,
 }
 impl ChangeKind {
-    pub fn wire(self) -> i64 { match self {
-        Self::Refresh => 0,
-        Self::Delta => 1,
-    } }
-    pub fn from_wire(v: i64) -> Result<Self, DecodeError> { Ok(match v {
-        0 => Self::Refresh,
-        1 => Self::Delta,
-        _ => return Err(DecodeError::UnknownEnum { enum_name: "ChangeKind", value: v }),
-    }) }
+    pub fn wire(self) -> i64 {
+        match self {
+            Self::Refresh => 0,
+            Self::Delta => 1,
+        }
+    }
+    pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
+        Ok(match v {
+            0 => Self::Refresh,
+            1 => Self::Delta,
+            _ => {
+                return Err(DecodeError::UnknownEnum {
+                    enum_name: "ChangeKind",
+                    value: v,
+                })
+            }
+        })
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Default)]
@@ -134,9 +194,7 @@ pub struct GladeId {
 }
 impl GladeId {
     pub fn to_cbor(&self) -> Cbor {
-        Cbor::Map(vec![
-            (1, Cbor::Text(self.id.clone())),
-        ])
+        Cbor::Map(vec![(1, Cbor::Text(self.id.clone()))])
     }
     pub fn from_cbor(c: &Cbor) -> Result<Self, DecodeError> {
         Ok(Self {
@@ -154,13 +212,26 @@ impl Retention {
     pub fn to_cbor(&self) -> Cbor {
         Cbor::Map(vec![
             (1, Cbor::Int(self.policy.wire())),
-            (2, match &self.ttl_ms { Some(v) => Cbor::Int(*v), None => Cbor::Null }),
+            (
+                2,
+                match &self.ttl_ms {
+                    Some(v) => Cbor::Int(*v),
+                    None => Cbor::Null,
+                },
+            ),
         ])
     }
     pub fn from_cbor(c: &Cbor) -> Result<Self, DecodeError> {
         Ok(Self {
             policy: RetentionPolicy::from_wire(c.try_get(1)?.try_int()?)?,
-            ttl_ms: { let v = c.try_get(2)?; if v.is_null() { None } else { Some(v.try_int()?) } },
+            ttl_ms: {
+                let v = c.try_get(2)?;
+                if v.is_null() {
+                    None
+                } else {
+                    Some(v.try_int()?)
+                }
+            },
         })
     }
 }
@@ -181,7 +252,13 @@ impl BindingDecl {
             (1, self.glade_id.to_cbor()),
             (2, Cbor::Int(self.shape.wire())),
             (3, Cbor::Int(self.authority.wire())),
-            (4, match &self.source { Some(v) => Cbor::Text(v.clone()), None => Cbor::Null }),
+            (
+                4,
+                match &self.source {
+                    Some(v) => Cbor::Text(v.clone()),
+                    None => Cbor::Null,
+                },
+            ),
             (5, Cbor::Int(self.domain.wire())),
             (6, Cbor::Int(self.zone.wire())),
             (7, self.retention.to_cbor()),
@@ -192,7 +269,14 @@ impl BindingDecl {
             glade_id: GladeId::from_cbor(c.try_get(1)?)?,
             shape: Shape::from_wire(c.try_get(2)?.try_int()?)?,
             authority: Authority::from_wire(c.try_get(3)?.try_int()?)?,
-            source: { let v = c.try_get(4)?; if v.is_null() { None } else { Some(v.try_text()?) } },
+            source: {
+                let v = c.try_get(4)?;
+                if v.is_null() {
+                    None
+                } else {
+                    Some(v.try_text()?)
+                }
+            },
             domain: DomainAnchor::from_wire(c.try_get(5)?.try_int()?)?,
             zone: ZoneKind::from_wire(c.try_get(6)?.try_int()?)?,
             retention: Retention::from_cbor(c.try_get(7)?)?,
@@ -258,8 +342,20 @@ impl ChangeEvent {
             (1, self.glade_id.to_cbor()),
             (2, Cbor::Int(self.shape.wire())),
             (3, Cbor::Int(self.kind.wire())),
-            (4, match &self.base_seq { Some(v) => Cbor::Int(*v), None => Cbor::Null }),
-            (5, match &self.origin_meta { Some(v) => v.to_cbor(), None => Cbor::Null }),
+            (
+                4,
+                match &self.base_seq {
+                    Some(v) => Cbor::Int(*v),
+                    None => Cbor::Null,
+                },
+            ),
+            (
+                5,
+                match &self.origin_meta {
+                    Some(v) => v.to_cbor(),
+                    None => Cbor::Null,
+                },
+            ),
             (6, Cbor::Bytes(self.payload.clone())),
         ])
     }
@@ -268,8 +364,22 @@ impl ChangeEvent {
             glade_id: GladeId::from_cbor(c.try_get(1)?)?,
             shape: Shape::from_wire(c.try_get(2)?.try_int()?)?,
             kind: ChangeKind::from_wire(c.try_get(3)?.try_int()?)?,
-            base_seq: { let v = c.try_get(4)?; if v.is_null() { None } else { Some(v.try_int()?) } },
-            origin_meta: { let v = c.try_get(5)?; if v.is_null() { None } else { Some(OriginMeta::from_cbor(v)?) } },
+            base_seq: {
+                let v = c.try_get(4)?;
+                if v.is_null() {
+                    None
+                } else {
+                    Some(v.try_int()?)
+                }
+            },
+            origin_meta: {
+                let v = c.try_get(5)?;
+                if v.is_null() {
+                    None
+                } else {
+                    Some(OriginMeta::from_cbor(v)?)
+                }
+            },
             payload: c.try_get(6)?.try_bytes()?,
         })
     }

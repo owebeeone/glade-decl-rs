@@ -30,6 +30,13 @@ PYTHONPATH=../taut/src python3 -m taut.cli gen ir/glade_decl.taut.py \
     -o /tmp/g -l rust --api-only --with-runtime      # -> api.rs, cbor.rs, ext.rs
 cp /tmp/g/rust/*.rs ../glade-decl-rs/src/
 python3 corpus/build.py                              # rewrites ../glade-decl-rs/src/vectors.rs
+cd ../glade-decl-rs && cargo fmt                     # api.rs: tautc does not format its output
 ```
+
+Generated Rust is committed **formatted**. `build.py` runs `rustfmt` over
+`src/vectors.rs` itself — on write and on `--check` alike, so `rustfmt` is
+required by that gate — but `src/api.rs` comes from the taut compiler, so
+`cargo fmt` is the step that brings it to the same convention. `cargo fmt
+--check` must be clean here.
 
 Design: `glade-decl/dev-docs/DeclSurface.md`.

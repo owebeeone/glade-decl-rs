@@ -36,13 +36,27 @@ pub static VECTORS: &[(&str, &str, &str)] = &[
 /// Decode->re-encode dispatch by message name, over this crate's generated types.
 pub fn reencode(message: &str, c: &crate::Cbor) -> crate::Cbor {
     match message {
-        "AdvertisementRecord" => crate::AdvertisementRecord::from_cbor(c).expect("corpus decode: AdvertisementRecord").to_cbor(),
-        "BindingDecl" => crate::BindingDecl::from_cbor(c).expect("corpus decode: BindingDecl").to_cbor(),
-        "ChangeEvent" => crate::ChangeEvent::from_cbor(c).expect("corpus decode: ChangeEvent").to_cbor(),
-        "GladeId" => crate::GladeId::from_cbor(c).expect("corpus decode: GladeId").to_cbor(),
-        "GladeIdManifest" => crate::GladeIdManifest::from_cbor(c).expect("corpus decode: GladeIdManifest").to_cbor(),
-        "OriginMeta" => crate::OriginMeta::from_cbor(c).expect("corpus decode: OriginMeta").to_cbor(),
-        "Retention" => crate::Retention::from_cbor(c).expect("corpus decode: Retention").to_cbor(),
+        "AdvertisementRecord" => crate::AdvertisementRecord::from_cbor(c)
+            .expect("corpus decode: AdvertisementRecord")
+            .to_cbor(),
+        "BindingDecl" => crate::BindingDecl::from_cbor(c)
+            .expect("corpus decode: BindingDecl")
+            .to_cbor(),
+        "ChangeEvent" => crate::ChangeEvent::from_cbor(c)
+            .expect("corpus decode: ChangeEvent")
+            .to_cbor(),
+        "GladeId" => crate::GladeId::from_cbor(c)
+            .expect("corpus decode: GladeId")
+            .to_cbor(),
+        "GladeIdManifest" => crate::GladeIdManifest::from_cbor(c)
+            .expect("corpus decode: GladeIdManifest")
+            .to_cbor(),
+        "OriginMeta" => crate::OriginMeta::from_cbor(c)
+            .expect("corpus decode: OriginMeta")
+            .to_cbor(),
+        "Retention" => crate::Retention::from_cbor(c)
+            .expect("corpus decode: Retention")
+            .to_cbor(),
         other => panic!("reencode: unknown message {other}"),
     }
 }
@@ -51,11 +65,17 @@ pub fn reencode(message: &str, c: &crate::Cbor) -> crate::Cbor {
 mod conformance {
     use super::reencode;
     fn unhex(s: &str) -> Vec<u8> {
-        (0..s.len()).step_by(2).map(|i| u8::from_str_radix(&s[i..i + 2], 16).unwrap()).collect()
+        (0..s.len())
+            .step_by(2)
+            .map(|i| u8::from_str_radix(&s[i..i + 2], 16).unwrap())
+            .collect()
     }
     fn hexof(b: &[u8]) -> String {
         use std::fmt::Write as _;
-        b.iter().fold(String::new(), |mut s, x| { let _ = write!(s, "{x:02x}"); s })
+        b.iter().fold(String::new(), |mut s, x| {
+            let _ = write!(s, "{x:02x}");
+            s
+        })
     }
     /// Parity == correctness: every golden vector (bytes from taut's Python codec)
     /// must decode and re-encode to the identical bytes via this crate's codec.
@@ -63,7 +83,10 @@ mod conformance {
     fn corpus_byte_parity() {
         assert!(!super::VECTORS.is_empty(), "empty corpus");
         for (name, message, golden) in super::VECTORS {
-            let out = hexof(&crate::encode(&reencode(message, &crate::decode(&unhex(golden)))));
+            let out = hexof(&crate::encode(&reencode(
+                message,
+                &crate::decode(&unhex(golden)),
+            )));
             assert_eq!(&out, golden, "byte mismatch for {name} ({message})");
         }
     }
