@@ -13,6 +13,7 @@ pub enum Shape {
     Window,
     Swmr,
     Crdt,
+    Atom,
 }
 impl Shape {
     pub fn wire(self) -> i64 {
@@ -25,6 +26,7 @@ impl Shape {
             Self::Window => 5,
             Self::Swmr => 6,
             Self::Crdt => 7,
+            Self::Atom => 8,
         }
     }
     pub fn from_wire(v: i64) -> Result<Self, DecodeError> {
@@ -37,6 +39,7 @@ impl Shape {
             5 => Self::Window,
             6 => Self::Swmr,
             7 => Self::Crdt,
+            8 => Self::Atom,
             _ => {
                 return Err(DecodeError::UnknownEnum {
                     enum_name: "Shape",
@@ -285,24 +288,21 @@ impl BindingDecl {
 }
 
 #[derive(Clone, Debug, PartialEq, Default)]
-pub struct AdvertisementRecord {
-    pub binding: BindingDecl,
-    pub package: String,
-    pub grip_key: String,
+pub struct ShapeProfileDecl {
+    pub glade_id: GladeId,
+    pub profile: String,
 }
-impl AdvertisementRecord {
+impl ShapeProfileDecl {
     pub fn to_cbor(&self) -> Cbor {
         Cbor::Map(vec![
-            (1, self.binding.to_cbor()),
-            (2, Cbor::Text(self.package.clone())),
-            (3, Cbor::Text(self.grip_key.clone())),
+            (1, self.glade_id.to_cbor()),
+            (2, Cbor::Text(self.profile.clone())),
         ])
     }
     pub fn from_cbor(c: &Cbor) -> Result<Self, DecodeError> {
         Ok(Self {
-            binding: BindingDecl::from_cbor(c.try_get(1)?)?,
-            package: c.try_get(2)?.try_text()?,
-            grip_key: c.try_get(3)?.try_text()?,
+            glade_id: GladeId::from_cbor(c.try_get(1)?)?,
+            profile: c.try_get(2)?.try_text()?,
         })
     }
 }

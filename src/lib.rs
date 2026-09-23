@@ -35,4 +35,4 @@ mod vectors;
 /// The pinned `glade-decl` contract commit this crate was generated from. CI
 /// regenerates from this exact contract and runs the corpus vectors; skew fails
 /// the build rather than drifting silently.
-pub const CONTRACT_VERSION: &str = "99a04e0b960d03cbe92c0ec17321761eda860845";
+pub const CONTRACT_VERSION: &str = "7d18cd3c92fac205e9c20160e78147c2573aae73";

@@ -3,7 +3,7 @@
 The Rust **rendering** of the [`glade-decl`](https://github.com/owebeeone/glade-decl)
 contract: generated native types + a deterministic-CBOR codec for the glade
 declaration surface (`GladeId`, `Shape`, `Authority`, `BindingDecl`,
-`AdvertisementRecord`, `ChangeEvent`, …). A leaf crate — no dependencies beyond
+`ShapeProfileDecl`, `ChangeEvent`, …). A leaf crate — no dependencies beyond
 its own vendored CBOR runtime — so grip-core / glial can type the declaration
 surface without importing glade or glial.
 

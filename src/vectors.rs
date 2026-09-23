@@ -5,14 +5,14 @@
 
 #[rustfmt::skip]
 pub static VECTORS: &[(&str, &str, &str)] = &[
-    ("AdvertisementRecord", "AdvertisementRecord", "a301a701a10162733102020301046273340502060007a201010219012c0262733203627333"),
     ("BindingDecl", "BindingDecl", "a701a10162733102020301046273340502060007a201010219012c"),
     ("ChangeEvent", "ChangeEvent", "a601a1016273310202030104182a05a2016273310219012c0643060102"),
     ("GladeId", "GladeId", "a101627331"),
     ("GladeIdManifest", "GladeIdManifest", "a3016273310262733203a101627331"),
     ("OriginMeta", "OriginMeta", "a2016273310219012c"),
     ("Retention", "Retention", "a201010219012c"),
-    ("edge/advert", "AdvertisementRecord", "a301a701a10168646f632e626f64790201030004f60501060007a2010102f6026a6772617a656c2d617070036b646f633a34322f626f6479"),
+    ("ShapeProfileDecl", "ShapeProfileDecl", "a201a10162733102627332"),
+    ("edge/binding-account-atom", "BindingDecl", "a701a1016d616363742e70726573656e63650208030004f60500060007a2010002f6"),
     ("edge/binding-account-commons", "BindingDecl", "a701a1016d616363742e73657474696e67730200030004f60500060007a2010002f6"),
     ("edge/binding-deployment-window", "BindingDecl", "a701a1016a7379732e6e6f746963650205030004f60502060007a2010002f6"),
     ("edge/binding-doc-commons-log", "BindingDecl", "a701a10168646f632e626f64790201030004f60501060007a2010102f6"),
@@ -36,9 +36,6 @@ pub static VECTORS: &[(&str, &str, &str)] = &[
 /// Decode->re-encode dispatch by message name, over this crate's generated types.
 pub fn reencode(message: &str, c: &crate::Cbor) -> crate::Cbor {
     match message {
-        "AdvertisementRecord" => crate::AdvertisementRecord::from_cbor(c)
-            .expect("corpus decode: AdvertisementRecord")
-            .to_cbor(),
         "BindingDecl" => crate::BindingDecl::from_cbor(c)
             .expect("corpus decode: BindingDecl")
             .to_cbor(),
@@ -56,6 +53,9 @@ pub fn reencode(message: &str, c: &crate::Cbor) -> crate::Cbor {
             .to_cbor(),
         "Retention" => crate::Retention::from_cbor(c)
             .expect("corpus decode: Retention")
+            .to_cbor(),
+        "ShapeProfileDecl" => crate::ShapeProfileDecl::from_cbor(c)
+            .expect("corpus decode: ShapeProfileDecl")
             .to_cbor(),
         other => panic!("reencode: unknown message {other}"),
     }
